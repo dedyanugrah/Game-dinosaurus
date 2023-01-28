@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" onkeypress="jump()">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box" id="box">
+        <div class="score" id="score">score : 0</div>
+        <img src="gambar/dino.png" alt="" id="dino">
+        <img src="gambar/cactus.png" alt="" id="cactus">
+        <div class="roadContainer" id="roadContainer">
+            <img src="gambar/road.png" alt="">
+        </div>
+    </div>
+</body>
+<script>
+    const char = document.getElementById("dino");
+    const cactus = document.getElementById("cactus");
+    const playerscore = document.getElementById("score");
+
+    let score = 0
+    let interval = null
+
+    let jumlahscore = ()=>{
+        score++
+        // player
+    }
+
+    function jump() {
+        if (char.classList != "animate") {
+            char.classList.add("animate");
+        }
+        setTimeout(function(){
+            char.classList.remove("animate")
+        },500)
+        let score = 0
+        interval = setInterval(jumlahscore, 100)
+    }
+
+    const ifHitCactus = setInterval(function(){
+        const charTop = parseInt(window.getComputedStyle(char).getPropertyValue("top")) 
+        const cactusleft = parseInt(window.getComputedStyle(cactus).getPropertyValue("left")) 
+
+    if(cactusleft < 90 && cactusleft > 0 && charTop >= 60){
+        cactus.style.animation = "none"
+        cactus.style.display = "none"
+        if(confirm("dino kamu nabrak kaktus, ingin ulang?")){
+            window.location.reload()
+        }
+    }  
+
+    })
+
+</script>
+</html>
